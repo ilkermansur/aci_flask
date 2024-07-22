@@ -200,7 +200,8 @@ def crt_bulk():
         # Change directory
         os.chdir(base_directory)
         result = create_bulk (file=file, host=host, token=token)
-        return render_template ("crt_bulk.html", result = result)
+        if result is not None:
+            return render_template ("crt_bulk.html", result = result)
         try: 
             os.remove(file_path)
         except Exception as e:

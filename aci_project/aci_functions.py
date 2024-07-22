@@ -58,7 +58,7 @@ def create_tenant (ip,tn_name, tn_alias, tn_desc, token):
 
         if response.status_code == 200 :
             result = f"Creating tenant {tn_name} succesfully"
-            return result
+            return result,response.status_code
         else:
             result = f" Error - {response} "
             return result
@@ -90,7 +90,7 @@ def create_vrf (ip,tn_name, vrf_name, vrf_alias, vrf_desc, token):
 
         if response.status_code == 200 :
             result = f"Creating vrf {vrf_name} succesfully"
-            return result
+            return result, response.status_code
 
         else:
             result = f"error - {response}"
@@ -136,7 +136,7 @@ def create_bd (ip,tn_name, vrf_name, bd_name, bd_alias, bd_desc, token):
 
         if response.status_code == 200 :
             result = f"Creating bd {bd_name} succesfully"
-            return result
+            return result, response.status_code
         else:
             result = f"error - {response}"
             return result
@@ -168,7 +168,7 @@ def create_app (ip, tn_name, app_name, app_alias, app_desc, token):
 
         if response.status_code == 200 :
             result = f"Creating app {app_name} succesfully"
-            return result
+            return result,response.status_code
         else:
             result = f" error - {response}"
             return result
@@ -210,7 +210,7 @@ def create_epg (ip, tn_name, app_name, bd_name, epg_name,epg_alias, epg_desc, to
 
         if response.status_code == 200 :
             result = f"Creating epg {epg_name} succesfully"
-            return result
+            return result, response.status_code
         else:
             result = f"error - {response}"
             return result
@@ -247,16 +247,40 @@ def create_bulk (file, host, token ):
                     app_name_list, app_alias_list, app_desc_list,
                     epg_name_list, epg_alias_list, epg_desc_list
                                 )
+            all_successful = True
+            for tn_name, tn_alias, tn_desc, vrf_name, vrf_alias, vrf_desc, bd_name, bd_alias, bd_desc, app_name, app_alias, app_desc, epg_name, epg_alias, epg_desc  in zip_list:
 
-                for tn_name, tn_alias, tn_desc, vrf_name, vrf_alias, vrf_desc, bd_name, bd_alias, bd_desc, app_name, app_alias, app_desc, epg_name, epg_alias, epg_desc  in zip_list:
+                    msg, status_code = create_tenant (ip=host, tn_name=tn_name, tn_alias=tn_alias, tn_desc=tn_desc, token=token)
+                    if status_code != 200:
+                        all_successful=False
+                        break
+                          
+                    msg, status_code = create_vrf (ip=host, tn_name=tn_name,vrf_name=vrf_name, vrf_alias=vrf_alias, vrf_desc=vrf_desc, token=token)
+                    if status_code != 200:
+                        all_successful=False
+                        break
 
-                    create_tenant (ip=host, tn_name=tn_name, tn_alias=tn_alias, tn_desc=tn_desc, token=token)
-                    create_vrf (ip=host, tn_name=tn_name,vrf_name=vrf_name, vrf_alias=vrf_alias, vrf_desc=vrf_desc, token=token)
-                    create_bd (ip=host, tn_name=tn_name, vrf_name=vrf_name, bd_name=bd_name, bd_alias=bd_alias,bd_desc=bd_desc, token=token)
-                    create_app (ip=host, tn_name=tn_name, app_name=app_name, app_alias=app_alias, app_desc=app_desc, token=token)
-                    create_epg ( ip=host, tn_name=tn_name, app_name=app_name, bd_name=bd_name, epg_name=epg_name, epg_alias=epg_alias, epg_desc=epg_desc, token=token)
+                    msg, status_code = create_bd (ip=host, tn_name=tn_name, vrf_name=vrf_name, bd_name=bd_name, bd_alias=bd_alias,bd_desc=bd_desc, token=token)
+                    if status_code != 200:
+                        all_successful=False
+                        break
+
+                    msg, status_code = create_app (ip=host, tn_name=tn_name, app_name=app_name, app_alias=app_alias, app_desc=app_desc, token=token)
+                    if status_code != 200:
+                        all_successful=False
+                        break
+
+                    msg, status_code = create_epg ( ip=host, tn_name=tn_name, app_name=app_name, bd_name=bd_name, epg_name=epg_name, epg_alias=epg_alias, epg_desc=epg_desc, token=token)
+                    if status_code != 200:
+                        all_successful=False
+                        break
+            if all_successful == True:
                 result = "Successfully configured :) "
                 return result
+            else:
+                result = "Error is occured :( "
+                return result
+
         except:
             result = "Error is occured :( "
             return result
