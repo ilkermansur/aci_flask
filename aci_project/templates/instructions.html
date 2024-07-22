@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    homepage
+{% endblock %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Homepage</title>
+    </head>
+    <body>
+        <div align="center">
+            <h3>ACI Configuration Tool</h3>
+            <br>
+            <br>
+            <br>
+            <br>
+            <img src="{{ url_for('static', filename='images/Cisco-ACI.webp') }}"  height="500" width="auto"/>
+        </div>
+
+    </body>
+    </html>
+{% endblock %}

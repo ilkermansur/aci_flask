@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}
+    epg
+{% endblock %}
+{% block head %}
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+    .container {
+        width: 100%;
+        float: left;
+    }
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .col-30 {
+        width: 30%;
+        display: flex;
+        justify-content: top;
+        align-items: center;
+        text-align: top;
+        background-color: #daeaea;
+        height: 100vh; /* Tüm ekran yüksekliği */
+        flex-direction: column;
+    }
+    .col-70 {
+        width: 70%;
+        justify-content: center;
+        align-items: center;
+        text-align: justify;
+    }
+  </style>
+{% endblock %}
+
+{% block two_col %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-30">
+            <form action="" method="POST">
+                <br>
+                <br>
+                <h5>ACI Info</h5>
+                <input type="text" name="host" placeholder="Aci Ip Address" required><br><br>
+                <input type="text" name="username" placeholder="Aci Username" required><br><br>
+                <input type="password" name="password" placeholder="Aci Password" required>
+                <br>
+                <br>
+                <h5>EPG Info</h5>
+                <input type="text" name="tn_name" placeholder="Tenant Name" required><br><br>
+                <input type="text" name="app_name" placeholder="APP Name" required><br><br>
+                <input type="text" name="bd_name" placeholder="BD Name" required><br><br>
+                <input type="text" name="epg_name" placeholder="EPG Name" required><br><br>
+                <input type="text" name="epg_alias" placeholder="EPG Alias" required><br><br>
+                <input type="text" name="epg_desc" placeholder="EPG Desc" required>
+                <br><br>
+                <input type="submit" value="Create EPG">
+            </form>
+            {% if result %}
+            <br>
+            <br>
+            <div class="result">
+                <p>{{ result }}</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-70">
+            <h2> End Point Group </h2>
+            <p> &ensp;&ensp;The endpoint group (EPG) is the most important object in the policy model. An EPG is a managed object that is a named logical entity that contains a collection of endpoints. Endpoints are devices that are connected to the network directly or indirectly. They have an address (identity), a location, attributes (such as version or patch level), and can be physical or virtual. Knowing the address of an endpoint also enables access to all its other identity details. EPGs are fully decoupled from the physical and logical topology. Endpoint examples include servers, virtual machines, network-attached storage, or clients on the Internet. Endpoint membership in an EPG can be dynamic or static.</p>
+                <br>
+                <img src="{{ url_for('static', filename='images/aci_epg.jpg') }}"  height="500" width="auto"/>
+        </div>
+    </div>
+  </div>
+    
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}

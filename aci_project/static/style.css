@@ -1,0 +1,12 @@
+
+
+body {margin-left: 10mm;}
+
+/* for form container*/
+
+.form-container input[type="text"] {
+    border: 1px solid #ccc;
+    padding: 5px; /* Sadece text inputları düzenleyin */
+    margin: 5px 0; /* Sadece text inputlarının etrafındaki marginleri düzenleyin */
+    background-color: #f9f9f9;
+}

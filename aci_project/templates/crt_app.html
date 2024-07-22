@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}
+    app
+{% endblock %}
+{% block head %}
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+    .container {
+        width: 100%;
+        float: left;
+    }
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .col-30 {
+        width: 30%;
+        display: flex;
+        justify-content: top;
+        align-items: center;
+        text-align: top;
+        background-color: #daeaea;
+        height: 100vh; /* Tüm ekran yüksekliği */
+        flex-direction: column;
+    }
+    .col-70 {
+        width: 70%;
+        justify-content: center;
+        align-items: center;
+        text-align: justify;
+    }
+  </style>
+{% endblock %}
+
+{% block two_col %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-30">
+            <form action="" method="POST">
+                <br>
+                <br>
+                <h5>ACI Info</h5>
+                <input type="text" name="host" placeholder="Aci Ip Address" required><br><br>
+                <input type="text" name="username" placeholder="Aci Username" required><br><br>
+                <input type="password" name="password" placeholder="Aci Password" required>
+                <br>
+                <br>
+                <h5>APP Info</h5>
+                <input type="text" name="tn_name" placeholder="Tenant Name" required><br><br>
+                <input type="text" name="app_name" placeholder="APP Name" required><br><br>
+                <input type="text" name="app_alias" placeholder="APP Alias" required><br><br>
+                <input type="text" name="app_desc" placeholder="APP Desc" required>
+                <br><br>
+                <input type="submit" value="Create APP">
+            </form>
+            {% if result %}
+            <br>
+            <br>
+            <div class="result">
+                <p>{{ result }}</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-70">
+            <h2> Aplication Profile </h2>
+            <p> &ensp;&ensp;An application profile (fvAp) defines the policies, services and relationships between endpoint groups (EPGs).
+                Application profiles contain one or more EPGs. Modern applications contain multiple components. For example, an e-commerce application could require a web server, a database server, data located in a storage area network, and access to outside resources that enable financial transactions. The application profile contains as many (or as few) EPGs as necessary that are logically related to providing the capabilities of an application.
+            </p>
+                <br>
+                <img src="{{ url_for('static', filename='images/aci_app.jpg') }}"  height="500" width="auto"/>
+        </div>
+    </div>
+  </div>
+    
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}
+    vrf
+{% endblock %}
+
+{% block head %}
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+    .container {
+        width: 100%;
+        float: left;
+    }
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .col-30 {
+        width: 30%;
+        display: flex;
+        justify-content: top;
+        align-items: center;
+        text-align: top;
+        background-color: #daeaea;
+        height: 100vh; /* Tüm ekran yüksekliği */
+        flex-direction: column;
+    }
+    .col-70 {
+        width: 70%;
+        justify-content: center;
+        align-items: center;
+        text-align: justify;
+    }
+  </style>
+{% endblock %}
+
+{% block two_col %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-30">
+            <form action="" method="POST">
+                <br>
+                <br>
+                <h5>ACI Info</h5>
+                <input type="text" name="host" placeholder="Aci Ip Address" required><br><br>
+                <input type="text" name="username" placeholder="Aci Username" required><br><br>
+                <input type="password" name="password" placeholder="Aci Password" required>
+                <br>
+                <br>
+                <h5>VRF Info</h5>
+                <input type="text" name="tn_name" placeholder="Tenant Name" required><br><br>
+                <input type="text" name="vrf_name" placeholder="VRF Name" required><br><br>
+                <input type="text" name="vrf_alias" placeholder="VRF Alias" required><br><br>
+                <input type="text" name="vrf_desc" placeholder="VRF Desc" required>
+                <br><br>
+                <input type="submit" value="Create VRF">
+            </form>
+            {% if result %}
+            <br>
+            <br>
+            <div class="result">
+                <p>{{ result }}</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-70">
+            <h2> VRF </h2>
+            <p> &ensp;&ensp;A Virtual Routing and Forwarding (VRF) object (fvCtx) or context is a tenant network (called a private network in the APIC GUI). A tenant can have multiple VRFs. A VRF is a unique Layer 3 forwarding and application policy domain. A VRF defines a Layer 3 address domain. One or more bridge domains are associated with a VRF. All of the endpoints within the Layer 3 domain must have unique IP addresses because it is possible to forward packets directly between these devices if the policy allows it. A tenant can contain multiple VRFs. After an administrator creates a logical device, the administrator can create a VRF for the logical device, which provides a selection criteria policy for a device cluster. A logical device can be selected based on a contract name, a graph name, or the function node name inside the graph.</p>
+                <br>
+                <img src="{{ url_for('static', filename='images/aci_vrf.jpg') }}"  height="500" width="auto"/>
+        </div>
+    </div>
+  </div>
+    
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}

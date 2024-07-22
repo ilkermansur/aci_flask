@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}
+    bd
+{% endblock %}
+{% block head %}
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+    .container {
+        width: 100%;
+        float: left;
+    }
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .col-30 {
+        width: 30%;
+        display: flex;
+        justify-content: top;
+        align-items: center;
+        text-align: top;
+        background-color: #daeaea;
+        height: 100vh; /* Tüm ekran yüksekliği */
+        flex-direction: column;
+    }
+    .col-70 {
+        width: 70%;
+        justify-content: center;
+        align-items: center;
+        text-align: justify;
+    }
+  </style>
+{% endblock %}
+
+{% block two_col %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-30">
+            <form action="" method="POST">
+                <br>
+                <br>
+                <h5>ACI Info</h5>
+                <input type="text" name="host" placeholder="Aci Ip Address" required><br><br>
+                <input type="text" name="username" placeholder="Aci Username" required><br><br>
+                <input type="password" name="password" placeholder="Aci Password" required>
+                <br>
+                <br>
+                <h5>Bridge Domain Info</h5>
+                <input type="text" name="tn_name" placeholder="Tenant Name" required><br><br>
+                <input type="text" name="vrf_name" placeholder="VRF Name" required><br><br>
+                <input type="text" name="bridge_domain_name" placeholder="Bridge Domain Name" required><br><br>
+                <input type="text" name="bridge_domain_alias" placeholder="Bridge Domain Alias" required><br><br>
+                <input type="text" name="bridge_domain_desc" placeholder="Bridge Domain Desc." required>
+                <br><br>
+                <input type="submit" value="Create Bridge Domain">
+            </form>
+            {% if result %}
+            <br>
+            <br>
+            <div class="result">
+                <p>{{ result }}</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-70">
+            <h2> Bridge Domain </h2>
+            <p> &ensp;&ensp;A Bridge Domain (BD) is a Layer 2 representation inside the ACI fabric. The BD is where users will define their Anycast Gateway/subnet which would provide the default gateway for their host attached to the fabric. A subnet under the BD can have multiple options:
+                <br>
+                <b>Public :</b> This means that ACI will automatically advertise this subnet outside the fabric. Users are not longer required to create route-maps or distributing routes. ACI will automate this for you
+                <br>
+                <b>Private:</b> This means this subnet will stay within the Tenant. This is the default setting for subnets within a BD.
+                <br>
+                <b>Shared:</b> This means that the subnet can be shared with other VRF within the same Tenant. It is important to note if you enable this knob to users different subnets.</p>
+                <br>
+                <img src="{{ url_for('static', filename='images/aci_bd.jpg') }}"  height="500" width="auto"/>
+        </div>
+    </div>
+  </div>
+    
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}

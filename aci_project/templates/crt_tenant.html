@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}
+    tenant
+{% endblock %}
+
+{% block head %}
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+    .container {
+        width: 100%;
+        float: left;
+    }
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .col-30 {
+        width: 30%;
+        display: flex;
+        justify-content: top;
+        align-items: center;
+        text-align: top;
+        background-color: #daeaea;
+        height: 100vh; /* Tüm ekran yüksekliği */
+        flex-direction: column;
+    }
+    .col-70 {
+        width: 70%;
+        justify-content: center;
+        align-items: center;
+        text-align: justify;
+    }
+  </style>
+{% endblock %}
+
+{% block two_col %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-30">
+            <form action="" method="POST">
+                <br>
+                <br>
+                <h5>ACI Info</h5>
+                <input type="text" name="host" placeholder="Aci Ip Address" required><br><br>
+                <input type="text" name="username" placeholder="Aci Username" required><br><br>
+                <input type="password" name="password" placeholder="Aci Password" required>
+                <br>
+                <br>
+                <h5>Tenant Info</h5>
+                <input type="text" name="tn_name" placeholder="Tenant Name" required><br><br>
+                <input type="text" name="tn_alias" placeholder="Tenant Alias" required><br><br>
+                <input type="text" name="tn_desc" placeholder="Tenant Desc" required>
+                <br><br>
+                <input type="submit" value="Create Tenant">
+            </form>
+            {% if result %}
+            <br>
+            <br>
+            <div class="result">
+                <p>{{ result }}</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-70">
+            <h2> Tenant </h2>
+            <p> &ensp;&ensp;A tenant (fvTenant) is a logical container for application policies that enable an administrator to exercise domain-based access control. A tenant represents a unit of isolation from a policy perspective, but it does not represent a private network. Tenants can represent a customer in a service provider setting, an organization or domain in an enterprise setting, or just a convenient grouping of policies. Tenants can be isolated from one another or can share resources. The primary elements that the tenant contains are filters, contracts, outside networks, bridge domains, Virtual Routing and Forwarding (VRF) instances, and application profiles that contain endpoint groups (EPGs). Entities in the tenant inherit its policies. VRFs are also known as contexts; each VRF can be associated with multiple bridge domains.</p>
+                <br>
+                <img src="{{ url_for('static', filename='images/aci_tenant.jpg') }}"  height="500" width="auto"/>
+        </div>
+    </div>
+  </div>
+    
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+

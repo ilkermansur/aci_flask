@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}
+    ACI Bulk
+{% endblock %}
+
+{% block head %}
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+    .container {
+        width: 100%;
+        float: left;
+    }
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .col-30 {
+        width: 30%;
+        display: flex;
+        justify-content: top;
+        align-items: center;
+        text-align: top;
+        background-color: #daeaea;
+        height: 100vh; /* Tüm ekran yüksekliği */
+        flex-direction: column;
+    }
+    .col-70 {
+        width: 70%;
+        justify-content: center;
+        align-items: center;
+        text-align: justify;
+    }
+  </style>
+{% endblock %}
+
+{% block two_col %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-30">
+            <form action="" method="POST" enctype="multipart/form-data">
+                <br>
+                <br>
+                <h5>ACI Info</h5>
+                <input type="text" name="host" placeholder="Aci Ip Address" required><br><br>
+                <input type="text" name="username" placeholder="Aci Username" required><br><br>
+                <input type="password" name="password" placeholder="Aci Password" required>
+                <br>
+                <br>
+                <h5>Upload Excel</h5>
+                <input type="file" name="crt_bulk" placeholder="Upload File" accept=".xlsx" ><br><br>
+                <br>
+                <input type="submit" value="Upload and execute">
+            </form>
+            {% if result %}
+            <br>
+            <br>
+            <div class="result">
+                <p>{{ result }}</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-70">
+            <h2> Create Bulk Configuration </h2><br>
+            <h3>Bulk Template File</h3><br>
+            <a href="/downloads/bulk_temp.xlsx">Download Bulk Template File</a>
+            <br><br>
+            <h5> Upload Bulk file procedure</h5>
+            <ul>
+                <li>Download excel file from above link</li>
+                <li>Fill all cells of excel like belove figure</li>
+                <li><b>TAKE SNAPSHOOT BEFORE PROCESS ! </b></li>
+            </ul>
+                <br>
+                <img src="{{ url_for('static', filename='images/bulk_template.png') }}"  height="auto" width="1000"/>
+        </div>
+    </div>
+  </div>
+    
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
