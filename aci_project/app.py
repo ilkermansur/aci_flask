@@ -1,15 +1,25 @@
+from dotenv import load_dotenv
+import os
 from flask import Flask, redirect, url_for, render_template, request, send_from_directory
 from aci_functions import login, create_tenant, create_vrf, create_bd, create_app, create_epg, create_bulk
 import json
 import requests
 import urllib3
 import time
-import pandas as pd
 import re
 import os
 from werkzeug.utils import secure_filename
 
+
+
 app = Flask(__name__)
+
+load_dotenv()  # This loads the environment variables from .env
+
+# Now you can access the environment variables using os.getenv
+default_host = os.getenv('HOST')
+default_username = os.getenv('USERNAME')
+default_password = os.getenv('PASSWORD')
 
 @app.route ("/")
 def instruction ():
@@ -41,9 +51,9 @@ def crt_tenant():
 
             return render_template ("crt_tenant.html", result=result)
         else:
-            return render_template ("crt_tenant.html")
+            return render_template ("crt_tenant.html", host=default_host, username=default_username, password=default_password)
     else:
-        return render_template ("crt_tenant.html")
+        return render_template ("crt_tenant.html", host=default_host, username=default_username, password=default_password)
 
 @app.route("/create_vrf", methods = ["POST", "GET"])
 def crt_vrf():
