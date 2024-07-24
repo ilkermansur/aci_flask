@@ -82,9 +82,9 @@ def crt_vrf():
 
             return render_template ("crt_vrf.html", result=result)
         else:
-            return render_template ("crt_vrf.html")
+            return render_template ("crt_vrf.html",host=default_host, username=default_username, password=default_password)
     else:
-        return render_template ("crt_vrf.html")
+        return render_template ("crt_vrf.html",host=default_host, username=default_username, password=default_password)
 
 
 @app.route("/create_bd", methods = ["POST", "GET"])
@@ -116,10 +116,11 @@ def crt_bd():
                                     bd_desc=bridge_domain_desc,
                                     token=token
                                     )
+                return render_template("crt_bd.html",result=result)
             else:
-                return render_template ("crt_bd.html") 
+                return render_template ("crt_bd.html",host=default_host, username=default_username, password=default_password) 
         else:
-            return render_template ("crt_bd.html")
+            return render_template ("crt_bd.html",host=default_host, username=default_username, password=default_password)
 
 @app.route("/create_app", methods = ["POST", "GET"])
 def crt_app():
@@ -149,9 +150,9 @@ def crt_app():
 
             return render_template ("crt_app.html", result=result)
         else:
-            return render_template ("crt_app.html")
+            return render_template ("crt_app.html", host=default_host, username=default_username, password=default_password)
     else:
-        return render_template ("crt_app.html")
+        return render_template ("crt_app.html",host=default_host, username=default_username, password=default_password)
 
 @app.route("/create_epg", methods = ["POST", "GET"])
 def crt_epg():
@@ -184,9 +185,9 @@ def crt_epg():
 
             return render_template ("crt_epg.html", result=result)
         else:
-            return render_template ("crt_epg.html")
+            return render_template ("crt_epg.html",host=default_host, username=default_username, password=default_password)
     else:
-        return render_template ("crt_epg.html")
+        return render_template ("crt_epg.html",host=default_host, username=default_username, password=default_password)
     
 @app.route("/create_bulk", methods = ["POST", "GET"])
 def crt_bulk():
@@ -217,7 +218,7 @@ def crt_bulk():
         except Exception as e:
             print (e)
 
-    return render_template ("crt_bulk.html")
+    return render_template ("crt_bulk.html",host=default_host, username=default_username, password=default_password)
 
 # Download bulk template
 @app.route('/downloads/<filename>')
